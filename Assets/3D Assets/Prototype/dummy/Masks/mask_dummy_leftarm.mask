@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mask_dummy_leftarm
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/ROOT
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ArmIKTarget.L
+    m_Weight: 1
+  - m_Path: Armature/ROOT/ArmIKTarget.L/ArmIKTarget.L_end
+    m_Weight: 1
+  - m_Path: Armature/ROOT/ArmIKTarget.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/ArmIKTarget.R/ArmIKTarget.R_end
+    m_Weight: 0
+  - m_Path: Armature/ROOT/LegIKTarget.L
+    m_Weight: 0
+  - m_Path: Armature/ROOT/LegIKTarget.L/LegIKTarget.L_end
+    m_Weight: 0
+  - m_Path: Armature/ROOT/LegIKTarget.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/LegIKTarget.R/LegIKTarget.R_end
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.L
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.L/Arm.L
+    m_Weight: 1
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.L/Arm.L/Forearm.L
+    m_Weight: 1
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.L/Arm.L/Forearm.L/Hand.L
+    m_Weight: 1
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.L/Arm.L/Forearm.L/Hand.L/Hand.L_end
+    m_Weight: 1
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.R/Arm.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.R/Arm.R/Forearm.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.R/Arm.R/Forearm.R/Hand.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/Clavicle.R/Arm.R/Forearm.R/Hand.R/Hand.R_end
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/UpperSpine2
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/UpperSpine2/Neck
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/UpperSpine2/Neck/Head
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Spine1/Spine2/Spine3/UpperSpine1/UpperSpine2/Neck/Head/Head_end
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.L
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.L/Shin.L
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.L/Shin.L/Foot.L
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.L/Shin.L/Foot.L/Foot.L_end
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.R/Shin.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.R/Shin.R/Foot.R
+    m_Weight: 0
+  - m_Path: Armature/ROOT/PelvisHelper/PelvisMaster/Thigh.R/Shin.R/Foot.R/Foot.R_end
+    m_Weight: 0
+  - m_Path: Dummy
+    m_Weight: 0
+  - m_Path: Shield
+    m_Weight: 0
+  - m_Path: Sword
+    m_Weight: 0
