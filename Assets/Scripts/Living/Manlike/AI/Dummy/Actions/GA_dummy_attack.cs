@@ -100,7 +100,6 @@ public class GA_dummy_attack : GoapAction
 
     public override void reset()
     {
-        Debug.Log("AAAA");
         m_attacked = false;
         target = null;
     }

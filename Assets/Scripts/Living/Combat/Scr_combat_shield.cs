@@ -22,11 +22,13 @@ public class Scr_combat_shield : MonoBehaviour, IHurt
     // Update is called once per frame
     void Update()
     {
+
         m_collider.enabled = m_manAnim.Shield;
     }
 
     public void Hurt(float damage, GameObject damager)
     {
-        Debug.Log("Shield");
+
     }
+
 }
