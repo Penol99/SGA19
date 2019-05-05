@@ -19,8 +19,6 @@ public class Scr_interact_door : MonoBehaviour, IInteract
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            Interact();
 
         if (m_doorOpen)
         {
