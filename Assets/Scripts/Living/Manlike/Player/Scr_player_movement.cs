@@ -13,7 +13,7 @@ public class Scr_player_movement : MonoBehaviour
     /// which contains the actual statemachine, where the actual state switching happens.
     /// </summary>
 
-
+    
     private CharacterController m_cc;
     private Scr_player_controller m_pCon;
     private Transform m_cam;
@@ -51,13 +51,17 @@ public class Scr_player_movement : MonoBehaviour
         // Add the 2 Dimensions of the joystick into an absolute 1 Dimensional float multiplied by speed
         float x = Mathf.Abs(m_pCon.LHor);
         float y = Mathf.Abs(m_pCon.LVer);
-        moveVelocity = Scr_math_formulas.SquareToCircle(x, y) * moveSpeed;
 
-        
-        //Debug.Log("y: " + );
+        if (!Scr_player_controller.FreezePlayer)
+        {
+            LeftStickRotation();
+            moveVelocity = Scr_math_formulas.SquareToCircle(x, y) * moveSpeed;
+        }
+        else
+            moveVelocity = 0;
 
-        Gravity();
-        LeftStickRotation();
+
+        Gravity();        
         return moveVelocity;
     }
 

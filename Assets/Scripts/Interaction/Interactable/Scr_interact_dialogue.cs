@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Scr_interact_dialogue : MonoBehaviour, IInteract
 {
+    public string m_profileName;
+
+    private Scr_dialogue_display m_dialogueDisplay;
+    private Scr_dialogue_profile m_profile;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_dialogueDisplay = FindObjectOfType<Scr_dialogue_display>();
+        m_profile = m_dialogueDisplay.GetComponent(m_profileName) as Scr_dialogue_profile;
     }
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+
+        m_dialogueDisplay.StartDialogue(m_profile);
     }
 }

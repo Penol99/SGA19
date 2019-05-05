@@ -9,8 +9,8 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
 {
     public PBaseState m_baseState;
     public PSubState m_subState;
+    public static bool FreezePlayer;
 
-    
     private CharacterController m_cc;
     private Scr_manlike_animation m_manAnim;
     private Scr_manlike_input m_manInput;
@@ -53,14 +53,17 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
 
     void ControllerInput()
     {
-        LHor = Input.GetAxis("LeftHor");
-        LVer = Input.GetAxis("LeftVer");
-        RHor = Input.GetAxis("RightHor");
-        RVer = Input.GetAxis("RightVer");
-        m_manInput.RunTrigger = Input.GetButton("Run");
-        m_manInput.RollTrigger = Input.GetButtonUp("Roll");
-        m_manInput.R1Trigger = Input.GetButtonDown("R1Action");
-        m_manInput.L1Trigger = Input.GetButton("L1Action");
+        if (!FreezePlayer)
+        {
+            LHor = Input.GetAxis("LeftHor");
+            LVer = Input.GetAxis("LeftVer");
+            RHor = Input.GetAxis("RightHor");
+            RVer = Input.GetAxis("RightVer");
+            m_manInput.RunTrigger = Input.GetButton("Run");
+            m_manInput.RollTrigger = Input.GetButtonUp("Roll");
+            m_manInput.R1Trigger = Input.GetButtonDown("R1Action");
+            m_manInput.L1Trigger = Input.GetButton("L1Action");
+        }
         
     }
     void StateMachine()

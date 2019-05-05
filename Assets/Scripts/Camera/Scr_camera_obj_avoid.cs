@@ -28,7 +28,6 @@ public class Scr_camera_obj_avoid : MonoBehaviour
     private float m_cameraRayDist = 2f;
     private float m_orbitSpeed = 6f;
 
-
     //NOTE: PLAYER DISTANCE TO CAMERA AND COLLISION
 
     // Start is called before the first frame update
@@ -113,8 +112,8 @@ public class Scr_camera_obj_avoid : MonoBehaviour
     {
         float stickHor = Input.GetAxis("RightHor");
         float stickVer = Input.GetAxis("RightVer");
-
-        m_camFreeLook.m_YAxisRecentering.m_enabled = (stickVer == 0 && stickHor != 0);
+        if (!Scr_player_controller.FreezePlayer)
+            m_camFreeLook.m_YAxisRecentering.m_enabled = (stickVer == 0 && stickHor != 0);
 
     }
 
@@ -134,7 +133,18 @@ public class Scr_camera_obj_avoid : MonoBehaviour
         {           
             if (!m_cAnyRays)
                 OrbitCameraToPlayer();
-        }     
+        }
+
+        // Freeze Camera, only added this code here cause its the only script attached to the freelook
+        if (Scr_player_controller.FreezePlayer)
+        {
+            m_camFreeLook.m_YAxis.m_InputAxisName = "";
+            m_camFreeLook.m_XAxis.m_InputAxisName = "";
+        } else
+        {
+            m_camFreeLook.m_YAxis.m_InputAxisName = "RightVer";
+            m_camFreeLook.m_XAxis.m_InputAxisName = "RightHor";
+        }
         
     }
 }

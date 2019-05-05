@@ -1,68 +1,137 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Scr_dialogue_display : MonoBehaviour
 {
+    [Header("DialogueBox")]
     public GameObject m_dialogueBox;
     public Text m_nameText;
     public Text m_dialogueText;
     public float m_typeTime = .5f;
 
-    private List<string> m_testText = new List<string>();
+    [Header("Question Box")]
+    public EventSystem m_eventSystem;
+    public GameObject m_answerBox;
+    public Text[] m_AnswerButtonText = new Text[4];
+
+    private List<string> m_dialogue = new List<string>();
+    private Scr_dialogue_profile m_currentProfile;
+    private bool m_questionOpen;
     private bool m_isTyping;
     private bool m_writeChar;
+    private bool m_hasStarted;
     private int m_dialogueIndex;
+    private int m_answerIndex;
     private int m_charIndex;
+    private string m_name;
     private string m_textWritten = "";
     private IEnumerator coroutine;
 
 
-
-    private void Start()
-    {
-        /*
-        m_testText.Add("It has been 4 hours since I successfully sucked my own penis. Things are different now.");
-        m_testText.Add("As soon as mouth-to- penis contact was made I felt a shockwave through my body.");
-        StartDialogue(m_testText, "bert");
-        */
-    }
-
     void Update()
     {
         // If dialoguebox is active then you can keep progressing through the dialogue
-        if (m_dialogueBox.activeInHierarchy)
+        if (m_dialogueBox.activeInHierarchy && !m_questionOpen)
         {
-            if (Input.GetButtonDown("Interact"))
+            if (Input.GetButtonDown("Interact") && !m_hasStarted )
             {
-                NextDialogue(m_testText, "bert");
+                NextDialogue(m_currentProfile);
             }
         }
     }
 
-
-    public void StartDialogue(List<string> textList, string name)
+    public void AnswerQuestion(int answer)
     {
-        m_dialogueBox.SetActive(true);
-        m_nameText.text = name;
-        if (!m_isTyping)
+        m_answerIndex = answer;
+
+        m_questionOpen = false;
+        m_answerBox.SetActive(false);
+        // Disable answerboxes when done
+        foreach (var answerBox in m_AnswerButtonText)
         {
-            WriteDialogue(textList[m_dialogueIndex]);
+            answerBox.transform.parent.gameObject.SetActive(false);
         }
 
     }
 
-    private void NextDialogue(List<string> textList, string name)
+
+    public void StartDialogue(Scr_dialogue_profile profile)
+    {     
+        if (!m_isTyping && !m_dialogueBox.activeInHierarchy)
+        {
+            m_currentProfile = profile;
+            m_hasStarted = true;
+            m_dialogueBox.SetActive(true);
+            m_name = profile.Name();
+            m_nameText.text = m_name;
+            m_dialogue = profile.Dialogue(); ;
+            WriteDialogue(m_dialogue[m_dialogueIndex]);
+            Scr_player_controller.FreezePlayer = true;
+        }
+
+    }
+
+    private void CheckDialogueCode(List<string> textList)
+    {
+        string currentLine = textList[m_dialogueIndex];
+
+
+        if (currentLine.Contains("Scr_"))
+            ChangeProfile(textList[m_dialogueIndex]);
+        else if (currentLine.Contains("Q:"))
+            StartQuestion(m_currentProfile);
+        else
+            WriteDialogue(textList[m_dialogueIndex]);
+    }
+
+    private void ChangeProfile(string nextProfile)
+    {
+        int index = System.Convert.ToInt32(nextProfile.Remove(1));
+        nextProfile = nextProfile.Remove(0, 1);
+        Scr_dialogue_profile newProfile = GetComponent(nextProfile) as Scr_dialogue_profile;
+        m_currentProfile = newProfile;
+        m_dialogueIndex = index;
+        m_dialogue = newProfile.Dialogue();
+        m_dialogue.TrimExcess();
+        m_name = newProfile.Name();
+        m_nameText.text = m_name;
+
+        WriteDialogue(m_dialogue[m_dialogueIndex]);
+    }
+
+    private void StartQuestion(Scr_dialogue_profile profile)
+    {
+        m_answerBox.SetActive(true);
+        m_questionOpen = true;
+        int qIndex = System.Convert.ToInt32(m_dialogue[m_dialogueIndex].Remove(0, 2));
+        Question question = profile.GetQuestions()[qIndex];
+        WriteDialogue(question.m_text);
+      
+        // Write answers on the buttons
+        for (int i = 0; i < question.m_answerAmount; i++)
+        {
+            m_AnswerButtonText[i].transform.parent.gameObject.SetActive(true);
+            m_AnswerButtonText[i].text = question.m_Answer[i].Key; // Set the text on the button
+        }
+        m_eventSystem.SetSelectedGameObject(m_AnswerButtonText[0].transform.parent.gameObject);
+    }
+
+
+
+    private void NextDialogue(Scr_dialogue_profile profile)
     {
         if (!m_isTyping)
         {
-            if ((m_dialogueIndex < textList.Count - 1))
+            if ((m_dialogueIndex < m_dialogue.Count - 1))
             {
                 m_dialogueIndex++;
                 m_textWritten = "";
-
-                StartDialogue(textList, name);
+                CheckDialogueCode(m_dialogue);
+                      
             }
             else
             {
@@ -72,8 +141,8 @@ public class Scr_dialogue_display : MonoBehaviour
 
         if (m_isTyping)
         {
-            m_dialogueText.text = textList[m_dialogueIndex];
-            m_textWritten = textList[m_dialogueIndex];
+            m_dialogueText.text = m_dialogue[m_dialogueIndex];
+            m_textWritten = m_dialogue[m_dialogueIndex];
             StopCoroutine(coroutine);
             m_charIndex = 0;
             m_isTyping = false;
@@ -85,6 +154,7 @@ public class Scr_dialogue_display : MonoBehaviour
 
     public void CloseDialogue()
     {
+        m_hasStarted = false;
         m_charIndex = 0;
         m_dialogueText.text = "";
         m_textWritten = "";
@@ -93,6 +163,7 @@ public class Scr_dialogue_display : MonoBehaviour
         m_writeChar = false;
         m_isTyping = false;
         m_dialogueBox.SetActive(false);
+        Scr_player_controller.FreezePlayer = false;
     }
 
     private void WriteDialogue(string text)
@@ -115,7 +186,7 @@ public class Scr_dialogue_display : MonoBehaviour
     private IEnumerator AddNextChar(string text, float time)
     {
         yield return new WaitForSeconds(time);
-
+        m_hasStarted = false;
         m_writeChar = false;
         m_textWritten += text[m_charIndex - 1];
         m_dialogueText.text = m_textWritten;
