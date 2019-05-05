@@ -138,6 +138,8 @@ public class Scr_camera_obj_avoid : MonoBehaviour
         // Freeze Camera, only added this code here cause its the only script attached to the freelook
         if (Scr_player_controller.FreezePlayer)
         {
+            m_camFreeLook.m_YAxis.m_InputAxisValue = 0f;
+            m_camFreeLook.m_XAxis.m_InputAxisValue = 0f;
             m_camFreeLook.m_YAxis.m_InputAxisName = "";
             m_camFreeLook.m_XAxis.m_InputAxisName = "";
         } else

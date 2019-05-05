@@ -15,8 +15,8 @@ public abstract class Scr_dialogue_profile : MonoBehaviour
 
     private void Awake()
     {
-        m_dialogue = Dialogue();
         m_questions = SetQuestions();
+        m_dialogue = Dialogue();        
     }
 
     public List<Question> GetQuestions()

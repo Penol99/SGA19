@@ -27,6 +27,7 @@ public class Scr_dialogue_display : MonoBehaviour
     private int m_dialogueIndex;
     private int m_answerIndex;
     private int m_charIndex;
+    private int m_questionIndex;
     private string m_name;
     private string m_textWritten = "";
     private IEnumerator coroutine;
@@ -44,9 +45,13 @@ public class Scr_dialogue_display : MonoBehaviour
         }
     }
 
-    public void AnswerQuestion(int answer)
+    public void AnswerQuestion(int index)
     {
-        m_answerIndex = answer;
+        m_answerIndex = index;
+        KeyValuePair<string,bool> answer = m_currentProfile.GetQuestions()[m_questionIndex].m_Answer[index];
+        KeyValuePair<string, bool> newAnswer = new KeyValuePair<string, bool>(answer.Key,true);
+        m_currentProfile.GetQuestions()[m_questionIndex].m_Answer[index] = newAnswer;
+
 
         m_questionOpen = false;
         m_answerBox.SetActive(false);
@@ -55,6 +60,7 @@ public class Scr_dialogue_display : MonoBehaviour
         {
             answerBox.transform.parent.gameObject.SetActive(false);
         }
+        NextDialogue(m_currentProfile);
 
     }
 
@@ -107,9 +113,9 @@ public class Scr_dialogue_display : MonoBehaviour
     {
         m_answerBox.SetActive(true);
         m_questionOpen = true;
-        int qIndex = System.Convert.ToInt32(m_dialogue[m_dialogueIndex].Remove(0, 2));
-        Question question = profile.GetQuestions()[qIndex];
-        WriteDialogue(question.m_text);
+        m_questionIndex = System.Convert.ToInt32(m_dialogue[m_dialogueIndex].Remove(0, 2));
+        Question question = profile.GetQuestions()[m_questionIndex];
+        m_dialogueText.text = question.m_text;
       
         // Write answers on the buttons
         for (int i = 0; i < question.m_answerAmount; i++)
@@ -124,6 +130,7 @@ public class Scr_dialogue_display : MonoBehaviour
 
     private void NextDialogue(Scr_dialogue_profile profile)
     {
+        m_dialogue = profile.Dialogue();
         if (!m_isTyping)
         {
             if ((m_dialogueIndex < m_dialogue.Count - 1))
@@ -139,7 +146,7 @@ public class Scr_dialogue_display : MonoBehaviour
             }
         }
 
-        if (m_isTyping)
+        if (m_isTyping) // Speed up dialogue
         {
             m_dialogueText.text = m_dialogue[m_dialogueIndex];
             m_textWritten = m_dialogue[m_dialogueIndex];

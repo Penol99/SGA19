@@ -21,6 +21,20 @@ public class Scr_profile_bert : Scr_dialogue_profile
         dialogue.Add("Det är det verkligen inte."); // 4
         dialogue.Add("Du är en osund jävel."); // 5
         dialogue.Add("Q:0"); // 6
+        
+        if (GetQuestions()[0].m_Answer[0].Value) // om pia luktar bira
+        {
+            dialogue.Clear();
+            
+            dialogue.Add("Wow tack du har en bra åsikt");
+            dialogue.Add("Respekt x10");
+        }
+        if (GetQuestions()[0].m_Answer[1].Value) // om pia inte luktar bira
+        {
+            dialogue.Clear();
+            dialogue.Add("Du har inga näsborrar.");
+        }
+        
 
 
         return dialogue;
