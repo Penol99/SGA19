@@ -74,6 +74,8 @@ public class Scr_dialogue_display : MonoBehaviour
             m_dialogueBox.SetActive(true);
             m_name = profile.Name();
             m_nameText.text = m_name;
+            m_dialogueText.font = profile.m_dialogueFont;
+            m_nameText.font = profile.m_dialogueFont;
             m_dialogue = profile.Dialogue(); ;
             WriteDialogue(m_dialogue[m_dialogueIndex]);
             Scr_player_controller.FreezePlayer = true;
@@ -101,6 +103,9 @@ public class Scr_dialogue_display : MonoBehaviour
         Scr_dialogue_profile newProfile = GetComponent(nextProfile) as Scr_dialogue_profile;
         m_currentProfile = newProfile;
         m_dialogueIndex = index;
+        m_dialogueText.font = newProfile.m_dialogueFont;
+        m_nameText.font = newProfile.m_dialogueFont;
+        m_dialogueText.text = "";
         m_dialogue = newProfile.Dialogue();
         m_dialogue.TrimExcess();
         m_name = newProfile.Name();
@@ -123,7 +128,11 @@ public class Scr_dialogue_display : MonoBehaviour
             m_AnswerButtonText[i].transform.parent.gameObject.SetActive(true);
             m_AnswerButtonText[i].text = question.m_Answer[i].Key; // Set the text on the button
         }
-        m_eventSystem.SetSelectedGameObject(m_AnswerButtonText[0].transform.parent.gameObject);
+        Button firstButton = m_AnswerButtonText[0].transform.parent.GetComponent<Button>();
+        // Make the first answer button selected and highlighted at start
+        firstButton.Select();
+        firstButton.OnSelect(null);
+        
     }
 
 
@@ -135,6 +144,7 @@ public class Scr_dialogue_display : MonoBehaviour
         {
             if ((m_dialogueIndex < m_dialogue.Count - 1))
             {
+                
                 m_dialogueIndex++;
                 m_textWritten = "";
                 CheckDialogueCode(m_dialogue);

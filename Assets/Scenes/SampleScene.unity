@@ -887,7 +887,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 9.114e-42, y: 7.2156385e+22, z: 0.0000000025808873,
+    w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3208,6 +3209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a6d3d051196394689feabde049f5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dialogueFont: {fileID: 12800000, guid: 4e3a2ebac03112741825268b6c54183c, type: 3}
   m_dialogue: []
 --- !u!114 &811341855
 MonoBehaviour:
@@ -3221,6 +3223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d56972edfdd91c4e81d5b4211e392fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dialogueFont: {fileID: 12800000, guid: 465b6312b8e59324594851c698260b78, type: 3}
   m_dialogue: []
 --- !u!1 &840723624
 GameObject:
@@ -17873,11 +17876,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 49
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 59
+    m_MinSize: 5
+    m_MaxSize: 110
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1

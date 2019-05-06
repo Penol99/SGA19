@@ -10,6 +10,9 @@ public abstract class Scr_dialogue_profile : MonoBehaviour
     /// numberScr_profile_name / this will change the dialogue to another profile on the line from number, example (2Scr_profile_bert)
     /// 
     /// </summary>
+    /// 
+
+    public Font m_dialogueFont;
     public List<string> m_dialogue = new List<string>();
     public List<Question> m_questions = new List<Question>();
 
