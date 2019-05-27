@@ -7,13 +7,22 @@ public class Scr_player_interact : MonoBehaviour
 
     private float m_interactRange = 3f;
     private float m_interactAngle = 0.01f;
+    private Scr_save_load_game saveManager;
 
+    private void Awake()
+    {
+        saveManager = GameObject.FindObjectOfType<Scr_save_load_game>();
+    }
 
     private void Update()
     {
         if (Input.GetButtonDown("Interact"))
         {
             Interaction();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Application.Quit();
         }
     }
 
@@ -30,7 +39,10 @@ public class Scr_player_interact : MonoBehaviour
             float distToObj = (thisPos - objPos).sqrMagnitude;
 
             if ((distToObj < m_interactRange) && (facingAngle >= m_interactAngle))
+            {
+                saveManager.SaveGame();
                 obj.GetComponent<IInteract>().Interact();
+            }
         }
     }
 }

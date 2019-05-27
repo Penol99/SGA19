@@ -37,8 +37,7 @@ public class Scr_manlike_input : MonoBehaviour
 
     private void LateUpdate()
     {
-        MoveVelocity = Mathf.Clamp(MoveVelocity, 0, CurrentMoveSpeed);
-        
+        MoveVelocity = Mathf.Clamp(MoveVelocity, 0, CurrentMoveSpeed);        
     }
 
 

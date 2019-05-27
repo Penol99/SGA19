@@ -27,7 +27,7 @@
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-				float3 worldNormal : TEXCOOD0;
+				float3 worldNormal : NORMAL;
             };
 
 			fixed4 _Colour;
@@ -38,18 +38,22 @@
 				float3 worldNormal = UnityObjectToWorldNormal(v.normal);
 				o.worldNormal = worldNormal;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+
+				
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // sample the texture
-				float3 normalDirection = normalize(i.worldNormal);
-				float nl = max(0.0,dot(normalDirection, _WorldSpaceLightPos0.xyz));
+				float3 normalizedNormal = normalize(i.worldNormal);
+				float NdotL = max(0.0,dot(normalizedNormal, _WorldSpaceLightPos0.xyz));
+				NdotL = smoothstep(0,0.01,NdotL);//NdotL > 0 ? 1 : 0;
 
-                float4 diffuseTerm = nl * _Colour * _LightColor0;
+				float4 fragColor = (_Colour * NdotL * _LightColor0);
 
-                return diffuseTerm;
+				return fragColor;
+
+
             }
             ENDCG
         }

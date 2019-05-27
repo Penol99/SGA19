@@ -11,6 +11,8 @@ public class Scr_manlike_animation : MonoBehaviour
     private Animator m_animator;
     private Scr_manlike_input m_manInput;
 
+    private float m_moveVelBeforePause;
+
     private bool m_rollStart, m_rollEnd;
     private bool m_lightAttackStart, m_lightAttackEnd;
     private bool m_idleWalkRun;
@@ -48,6 +50,7 @@ public class Scr_manlike_animation : MonoBehaviour
 
     void SetVariables()
     {
+
 
         m_animator.SetFloat("velocity_walk_run", m_manInput.MoveVelocity / m_manInput.m_runSpeed);
         

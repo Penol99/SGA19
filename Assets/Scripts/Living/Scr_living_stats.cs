@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Scr_living_stats : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +14,8 @@ public class Scr_living_stats : MonoBehaviour
     private float m_healthLimit;
     private float m_staminaLimit;
 
+
+    public int SceneIndex { get => SceneManager.GetActiveScene().buildIndex; }
     public float StatHealth { get => m_statHealth; set => m_statHealth = value; }
     public float StatStamina { get => m_statStamina; set => m_statStamina = value; }
     public float HealthLimit { get => m_healthLimit; set => m_healthLimit = value; }

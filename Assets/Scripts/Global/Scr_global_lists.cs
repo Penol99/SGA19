@@ -6,6 +6,7 @@ public class Scr_global_lists : MonoBehaviour
 {
     public static List<GameObject> WorldObjects = new List<GameObject>();
     public static List<Transform> InteractList = new List<Transform>();
+    public static List<Animator> AnimatorList = new List<Animator>();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void OnStart()
@@ -14,6 +15,8 @@ public class Scr_global_lists : MonoBehaviour
         for (int i = 0; i < allObjects.Length; i++)
         {
             WorldObjects.Add(allObjects[i]);
+            if (allObjects[i].GetComponent<Animator>() != null)
+                AnimatorList.Add(allObjects[i].GetComponent<Animator>());
         }
     }
 

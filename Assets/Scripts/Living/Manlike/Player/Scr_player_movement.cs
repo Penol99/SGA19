@@ -52,6 +52,7 @@ public class Scr_player_movement : MonoBehaviour
         float x = Mathf.Abs(m_pCon.LHor);
         float y = Mathf.Abs(m_pCon.LVer);
 
+
         if (!Scr_player_controller.FreezePlayer)
         {
             LeftStickRotation();
