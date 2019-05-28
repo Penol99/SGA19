@@ -46,7 +46,7 @@ public class Scr_player_movement : MonoBehaviour
     }
 
     //--GET-VELOCITY-FROM-MOVEMENT-STICK-AXIS-VALUES
-    public float Move(float moveSpeed, float moveVelocity)
+    public float SetMoveVelocity(float moveSpeed, float moveVelocity)
     {
         // Add the 2 Dimensions of the joystick into an absolute 1 Dimensional float multiplied by speed
         float x = Mathf.Abs(m_pCon.LHor);

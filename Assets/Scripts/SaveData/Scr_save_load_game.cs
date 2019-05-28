@@ -8,17 +8,7 @@ public class Scr_save_load_game : MonoBehaviour
     public Scr_living_stats m_player;
 
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void Awake()
     {
         if (PlayerPrefs.GetInt("Continue") == 1)
         {
@@ -28,11 +18,11 @@ public class Scr_save_load_game : MonoBehaviour
         }
     }
 
+
     public void SaveGame()
     {
         Scr_save_data.SavePlayer(m_player);
         PlayerPrefs.SetInt("SceneIndex", m_player.SceneIndex);
-        Debug.Log(PlayerPrefs.GetInt("SceneIndex"));
     }
     public void LoadGame()
     {
@@ -44,9 +34,21 @@ public class Scr_save_load_game : MonoBehaviour
         m_player.StaminaLimit = playerData.m_staminaLimit;
 
         Vector3 playerPos;
-        playerPos.x = playerData.position[0];
-        playerPos.y = playerData.position[1];
-        playerPos.z = playerData.position[2];
+        // Right now it doesnt handle if the player hasnt been to a shrine, like in the starting area
+        if (PlayerPrefs.GetInt("PlayerDied") == 1)
+        {
+            playerPos.x = PlayerPrefs.GetFloat("ShrinePosX");
+            playerPos.y = PlayerPrefs.GetFloat("ShrinePosY");
+            playerPos.z = PlayerPrefs.GetFloat("ShrinePosZ");
+        } else
+        {
+            playerPos.x = playerData.position[0];
+            playerPos.y = playerData.position[1];
+            playerPos.z = playerData.position[2];
+        }
+        PlayerPrefs.SetInt("PlayerDied", 0);
+
+
 
         m_player.transform.position = playerPos;
     }

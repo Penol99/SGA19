@@ -12,7 +12,6 @@ public class Scr_titlescreen_buttons : MonoBehaviour
     public void Continue()
     {
         PlayerPrefs.SetInt("Continue", 1);
-        Debug.Log(PlayerPrefs.GetInt("SceneIndex"));
         int sceneIndex = PlayerPrefs.GetInt("SceneIndex");
         SceneManager.LoadScene(sceneIndex);
     }

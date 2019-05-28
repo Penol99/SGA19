@@ -9,11 +9,12 @@ public class Scr_manlike_find_target : MonoBehaviour
     private List<GameObject> m_targets = new List<GameObject>(); 
     private Scr_heap_sort m_heap;
 
-    private void Awake()
+    private void Start()
     {
         m_heap = gameObject.AddComponent<Scr_heap_sort>();
         m_targets = Scr_global_lists.LayerMaskToList(m_targetType);
     }
+
 
     public GameObject GetTargetInRange(float range)
     {

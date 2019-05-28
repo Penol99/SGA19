@@ -13,6 +13,8 @@ public class Scr_living_stats : MonoBehaviour
 
     private float m_healthLimit;
     private float m_staminaLimit;
+    private Vector3 m_startPos;
+    private Quaternion m_startRotation;
 
 
     public int SceneIndex { get => SceneManager.GetActiveScene().buildIndex; }
@@ -21,17 +23,20 @@ public class Scr_living_stats : MonoBehaviour
     public float HealthLimit { get => m_healthLimit; set => m_healthLimit = value; }
     public float StaminaLimit { get => m_staminaLimit; set => m_staminaLimit = value; }
     public bool IsDead { get => m_statHealth == 0; }
-    
 
-
-    
-
-    
 
     private void Start()
     {
+        m_startPos = transform.position;
+        m_startRotation = transform.rotation;
         HealthLimit = m_statHealth;
         StaminaLimit = m_statStamina;
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = m_startPos;
+        transform.rotation = m_startRotation;
     }
 
 

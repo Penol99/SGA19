@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Scr_manlike_input))]
 [RequireComponent(typeof(Scr_player_movement))]
@@ -11,12 +12,14 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
     public PSubState m_subState;
     public static bool FreezePlayer;
 
+    private Scr_save_load_game m_saveManager;
     private CharacterController m_cc;
     private Scr_manlike_animation m_manAnim;
     private Scr_manlike_input m_manInput;
     private Scr_player_movement m_pMov;
     private Scr_living_stats m_stats;
     private float m_rVer, m_rHor, m_lVer, m_lHor;
+    private float m_runAfterNoStaminaTimer = 0;
     private bool m_r1ActionBtnDown;
     private bool m_l1ActionBtn;
 
@@ -37,6 +40,7 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
     // Start is called before the first frame update
     void Start()
     {
+        m_saveManager = FindObjectOfType<Scr_save_load_game>();
         m_stats = GetComponent<Scr_living_stats>();
         m_manAnim = GetComponent<Scr_manlike_animation>();
         m_manInput = GetComponent<Scr_manlike_input>();
@@ -49,9 +53,25 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
     {
         StateMachine();
         ControllerInput();
+        OnDeath();
     }
 
-    void ControllerInput()
+    private void OnDeath()
+    {
+        if (m_stats.IsDead)
+        {
+            m_stats.StatHealth = m_stats.HealthLimit;
+            m_saveManager.SaveGame();
+            PlayerPrefs.SetInt("PlayerDied", 1);
+            PlayerPrefs.SetInt("Continue", 1);
+            int sceneIndex = PlayerPrefs.GetInt("ShrineSceneIndex");
+
+            SceneManager.LoadScene(sceneIndex);
+            
+        }
+    }
+
+    private void ControllerInput()
     {
         if (!FreezePlayer)
         {
@@ -66,7 +86,7 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
         }
         
     }
-    void StateMachine()
+    private void StateMachine()
     {
         switch (m_baseState)
         {
@@ -121,13 +141,26 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
 
     public void BS_Move()
     {
-        bool inRun = m_manInput.RunTrigger && m_stats.StatStamina > 0 && m_manInput.RunDelayTimer >= m_manInput.m_runDelay;
+        bool inRun = m_manInput.RunTrigger && m_stats.StatStamina > 0 && m_manInput.RunDelayTimer >= m_manInput.m_runDelay && m_canRun;
         int intInRun = System.Convert.ToInt16(inRun);
         int intOffRun = System.Convert.ToInt16(!inRun);
         // Delay Timer resets to 0 when runbtn is not held
         m_manInput.RunDelayTimer = (m_manInput.RunDelayTimer + Time.deltaTime) * System.Convert.ToInt16(m_manInput.RunTrigger);
         m_manInput.CurrentMoveSpeed = (m_manInput.m_walkSpeed * intOffRun) + (m_manInput.m_runSpeed * intInRun);
-        m_manInput.MoveVelocity = m_pMov.Move(m_manInput.CurrentMoveSpeed, m_manInput.MoveVelocity);
+        m_manInput.MoveVelocity = m_pMov.SetMoveVelocity(m_manInput.CurrentMoveSpeed, m_manInput.MoveVelocity);
+
+        #region Stop Running when stamina is 0
+        if (inRun && m_stats.StatStamina < 0.5f)
+        {
+            m_canRun = false;
+        }
+        if (!m_canRun)
+        {
+            // can run when stamina is atleast 10% filled;
+            m_canRun = m_stats.StatStamina > (m_stats.StaminaLimit * 0.4f);    
+        }
+        #endregion
+
 
         m_stats.AddStamina(m_manInput.m_staminaRunGain * Time.deltaTime * intOffRun);
         m_stats.SubStamina(m_manInput.m_staminaRunLoss * Time.deltaTime * intInRun);
