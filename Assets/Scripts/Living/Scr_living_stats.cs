@@ -10,9 +10,9 @@ public class Scr_living_stats : MonoBehaviour
     [SerializeField]
     private float m_statStamina = 50;
 
+    private float m_healthLimit = 100;
+    private float m_staminaLimit = 50;
 
-    private float m_healthLimit;
-    private float m_staminaLimit;
     private Vector3 m_startPos;
     private Quaternion m_startRotation;
 
@@ -29,8 +29,7 @@ public class Scr_living_stats : MonoBehaviour
     {
         m_startPos = transform.position;
         m_startRotation = transform.rotation;
-        HealthLimit = m_statHealth;
-        StaminaLimit = m_statStamina;
+
     }
 
     public void ResetPosition()

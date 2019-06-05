@@ -13,16 +13,17 @@ public class Scr_player_movement : MonoBehaviour
     /// which contains the actual statemachine, where the actual state switching happens.
     /// </summary>
 
-    
+    private Scr_living_fall_damage m_fallDmg;
     private CharacterController m_cc;
     private Scr_player_controller m_pCon;
     private Transform m_cam;
     private Vector3 m_moveDir = Vector3.zero;
     private float m_rotateSpeed = 18f;
-    private float m_gravity = 18f;
+    private float m_gravity = 20f;
 
     void Start()
     {
+        m_fallDmg = GetComponent<Scr_living_fall_damage>();
         m_cam = Camera.main.GetComponent<Transform>();
         m_pCon = GetComponent<Scr_player_controller>();
         m_cc = GetComponent<CharacterController>();
@@ -68,10 +69,10 @@ public class Scr_player_movement : MonoBehaviour
 
     public void Gravity()
     {
-        if (m_cc.isGrounded)
-            m_moveDir.y = 0; // Reset velocity on the Y Axis when touching ground
+        if (!m_fallDmg.OnGround)
+            m_moveDir.y -= m_gravity * Time.deltaTime;
         else
-            m_moveDir.y -= m_gravity * Time.deltaTime; // Apply Gravity
+            m_moveDir.y = 0;//-m_gravity * Time.deltaTime; 
 
         m_cc.Move(m_moveDir * Time.deltaTime);
     }

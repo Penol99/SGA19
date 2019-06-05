@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 public class Scr_convert 
 {
@@ -16,4 +16,6 @@ public class Scr_convert
     {
         return value ? 1 : 0;
     }
+
+
 }

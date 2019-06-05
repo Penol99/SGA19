@@ -63,6 +63,7 @@ public class Scr_combat_hitbox : MonoBehaviour
         m_collidersHit.TrimExcess();
     }
 
+    // Shrinks hitbox on shield
     private void ShieldShrink()
     {
 

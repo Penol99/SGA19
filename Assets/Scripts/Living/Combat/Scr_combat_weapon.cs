@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Scr_combat_weapon : MonoBehaviour
 {
+
+    public string m_weaponName;
     [Header("Stats")]
     public float m_equipLoad;
     public float m_staminaLoss;

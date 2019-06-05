@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Scr_titlescreen_buttons : MonoBehaviour
 {
+
+    private void Start()
+    {
+        
+    }
+
+
     public void NewGame()
     {
         SceneManager.LoadScene(1);

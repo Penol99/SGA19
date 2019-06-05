@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Scr_interact_dialogue : MonoBehaviour, IInteract
 {
+    public static bool CanStartDialogue;
+
     public string m_profileName;
 
     private Scr_dialogue_display m_dialogueDisplay;
@@ -19,7 +21,7 @@ public class Scr_interact_dialogue : MonoBehaviour, IInteract
 
     public void Interact()
     {
-
-        m_dialogueDisplay.StartDialogue(m_profile);
+        if (CanStartDialogue)
+            m_dialogueDisplay.StartDialogue(m_profile);
     }
 }

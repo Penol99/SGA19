@@ -7,9 +7,12 @@ public class Scr_save_load_game : MonoBehaviour
 {
     public Scr_living_stats m_player;
 
+    private Scr_living_fall_damage m_playerFallDmg;
+
 
     private void Awake()
     {
+        
         if (PlayerPrefs.GetInt("Continue") == 1)
         {
             // Loads game if continue was selected in the title screen.
@@ -21,8 +24,18 @@ public class Scr_save_load_game : MonoBehaviour
 
     public void SaveGame()
     {
-        Scr_save_data.SavePlayer(m_player);
-        PlayerPrefs.SetInt("SceneIndex", m_player.SceneIndex);
+        m_playerFallDmg = m_player.GetComponent<Scr_living_fall_damage>();
+        
+        
+        if (m_playerFallDmg.OnGround)
+        {
+            Scr_save_data.SavePlayer(m_player);
+            PlayerPrefs.SetInt("SceneIndex", m_player.SceneIndex);
+            Debug.Log("SAVED");
+        } else
+        {
+            Debug.LogWarning("PLAYER MUST BE GROUNDED TO SAVE!");
+        }
     }
     public void LoadGame()
     {

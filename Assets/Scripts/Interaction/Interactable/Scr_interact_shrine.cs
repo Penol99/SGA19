@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class Scr_interact_shrine : MonoBehaviour, IInteract
 {
     public Scr_living_stats m_player;
+    public Scr_ui_panel m_interactUI;
     public Vector3 m_spawnPos;
 
 
-    private bool m_shrineActive;
     private float m_enemyRange = 5f;
     private Scr_manlike_find_target m_findTarget;
 
@@ -21,10 +21,12 @@ public class Scr_interact_shrine : MonoBehaviour, IInteract
     private void Update()
     {
         bool cancelButton = Input.GetButtonDown("Cancel");
-        if (m_shrineActive && cancelButton)
+        // This long ass line is so that you can only get out of ui if the first panel on the shrine window is active
+        bool cancelUI = cancelButton && Scr_global_canvas.ShrineWindow.GetComponent<Scr_ui_window>().m_panels[0].gameObject.activeInHierarchy;
+        if (cancelUI)
         {        
             Scr_player_controller.FreezePlayer = false;
-            m_shrineActive = false;
+            Scr_global_canvas.ShrineWindow.SetActive(false);
         }
     }
 
@@ -41,7 +43,6 @@ public class Scr_interact_shrine : MonoBehaviour, IInteract
 
     private void ChillAtShrine()
     {
-        m_shrineActive = true;
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("ShrineSceneIndex", sceneIndex);
         PlayerPrefs.SetFloat("ShrinePosX", m_spawnPos.x + transform.position.x);
@@ -49,16 +50,18 @@ public class Scr_interact_shrine : MonoBehaviour, IInteract
         PlayerPrefs.SetFloat("ShrinePosZ", m_spawnPos.z + transform.position.z);
         ResetEnemyPositions();
         PlayerInteraction();
+
+        // Open UI
+        Scr_global_canvas.ShrineWindow.SetActive(true);
+        //m_interactUI.OpenPanel(m_interactUI);
     }
+
+
 
     private void PlayerInteraction()
     {
         m_player.StatHealth = m_player.HealthLimit;
         Scr_player_controller.FreezePlayer = true;
-        if (Input.GetButtonDown("Cancel"))
-        {
-            Scr_player_controller.FreezePlayer = false;
-        }
     }
 
     private void ResetEnemyPositions()

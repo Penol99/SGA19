@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Scr_player_interact : MonoBehaviour
 {
+    private bool m_canInteract;
 
     private float m_interactRange = 3f;
     private float m_interactAngle = 0.01f;
@@ -11,6 +12,7 @@ public class Scr_player_interact : MonoBehaviour
 
     private void Awake()
     {
+        m_canInteract = true;
         saveManager = GameObject.FindObjectOfType<Scr_save_load_game>();
     }
 
@@ -29,19 +31,26 @@ public class Scr_player_interact : MonoBehaviour
 
     void Interaction()
     {
-        for (int i = 0; i < Scr_global_lists.InteractList.Count; i++)
-        {
-            
-            Transform obj = Scr_global_lists.InteractList[i];           
-            Vector3 thisPos = transform.position;
-            Vector3 objPos = obj.position;
-            float facingAngle = Vector3.Dot(transform.forward, (objPos - thisPos).normalized);
-            float distToObj = (thisPos - objPos).sqrMagnitude;
+        m_canInteract = !Scr_global_canvas.PauseMenuPanel.activeInHierarchy ||
+                      !Scr_global_canvas.ShrineWindow.activeInHierarchy ||
+                      !Scr_global_canvas.DialogueBox.activeInHierarchy;
 
-            if ((distToObj < m_interactRange) && (facingAngle >= m_interactAngle))
+        if (m_canInteract && !Scr_player_controller.FreezePlayer)
+        {
+            for (int i = 0; i < Scr_global_lists.InteractList.Count; i++)
             {
-                saveManager.SaveGame();
-                obj.GetComponent<IInteract>().Interact();
+
+                Transform obj = Scr_global_lists.InteractList[i];
+                Vector3 thisPos = transform.position;
+                Vector3 objPos = obj.position;
+                float facingAngle = Vector3.Dot(transform.forward, (objPos - thisPos).normalized);
+                float distToObj = (thisPos - objPos).sqrMagnitude;
+
+                if ((distToObj < m_interactRange) && (facingAngle >= m_interactAngle))
+                {
+                    saveManager.SaveGame();
+                    obj.GetComponent<IInteract>().Interact();
+                }
             }
         }
     }
