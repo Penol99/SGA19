@@ -16,8 +16,7 @@ public enum RPG_STATS
 public class Scr_ui_shrine_stat : MonoBehaviour
 { 
     public RPG_STATS m_statType;
-    public Text m_levelText;
-
+    public TMPro.TextMeshProUGUI m_levelText;
     private EventSystem m_eventSys;
     private Scr_player_rpg_stats m_rpgStats;
     private Scr_ui_level_up m_levelUpPanel;
@@ -26,14 +25,15 @@ public class Scr_ui_shrine_stat : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        m_levelUpPanel = FindObjectOfType<Scr_ui_level_up>();
         m_eventSys = Scr_global_canvas.MainEventSystem;
         m_rpgStats = FindObjectOfType<Scr_player_rpg_stats>();
+        m_modifiedLevel = GetCurrentStat(m_statType);
+        m_levelUpPanel = FindObjectOfType<Scr_ui_level_up>();
         m_levelText.text = GetCurrentStat(m_statType).ToString();
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         ModifyLevel();
     }
@@ -42,23 +42,62 @@ public class Scr_ui_shrine_stat : MonoBehaviour
     {
         if (m_eventSys.currentSelectedGameObject.Equals(gameObject))
         {
-            if (m_levelUpPanel.m_modifiedMoney >= m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedMoney))
+            if (m_levelUpPanel.m_modifiedMoney >= m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedLevel))
             {
-                if (Scr_modded_input.DPadRight)
+                if (Scr_modded_input.LStickRight)
                     AddLevel();
             }
+            if (GetCurrentStat(m_statType) < m_modifiedLevel)
+            {
+                if (Scr_modded_input.LStickLeft)
+                {
+                    RemoveLevel();
+                }
+            }
+        }
+        m_levelText.text = m_modifiedLevel.ToString();
+    }
+
+    private void AddModifyToLevelUp()
+    {
+        switch (m_statType)
+        {
+            case RPG_STATS.Health:
+                m_levelUpPanel.modHealthLvl = m_modifiedLevel;
+                break;
+            case RPG_STATS.Stamina:
+                m_levelUpPanel.modStaminaLvl = m_modifiedLevel;
+                break;
+            case RPG_STATS.Agility:
+                m_levelUpPanel.modAgilityLvl = m_modifiedLevel;
+                break;
+            case RPG_STATS.MeleeDMG:
+                m_levelUpPanel.modMeleeDMGLvl = m_modifiedLevel;
+                break;
+            case RPG_STATS.MeleeSPD:
+                m_levelUpPanel.modMeleeSPDLvl = m_modifiedLevel;
+                break;
+            case RPG_STATS.VanquishDMG:
+                m_levelUpPanel.modVanquishDMGLvl = m_modifiedLevel;
+                break;
+            default:
+                break;
         }
     }
 
     private void AddLevel()
     {
-        m_levelUpPanel.m_modifiedMoney -= m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedMoney);
+        m_levelUpPanel.m_modifiedMoney -= m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedLevel);
         m_levelUpPanel.m_modifiedLevel++;
+        m_modifiedLevel++;
+        AddModifyToLevelUp();
     }
     private void RemoveLevel()
     {
-        m_levelUpPanel.m_modifiedMoney += m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedMoney-1);
+        m_levelUpPanel.m_modifiedMoney += m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedLevel-1);
         m_levelUpPanel.m_modifiedLevel--;
+        m_modifiedLevel--;
+        AddModifyToLevelUp();
     }
 
     private int GetCurrentStat(RPG_STATS type)
@@ -116,5 +155,6 @@ public class Scr_ui_shrine_stat : MonoBehaviour
             default:
                 break;
         }
+        m_modifiedLevel = GetCurrentStat(m_statType);
     }
 }

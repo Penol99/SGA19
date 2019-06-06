@@ -7,16 +7,15 @@ using UnityEngine.EventSystems;
 
 public class Scr_dialogue_display : MonoBehaviour
 {
-    [Header("DialogueBox")]
-    public GameObject m_dialogueBox;
-    public Text m_nameText;
-    public Text m_dialogueText;
     public float m_typeTime = .5f;
 
-    [Header("Question Box")]
-    public EventSystem m_eventSystem;
+    public GameObject m_dialogueBox;
+    [HideInInspector]
+    public TMPro.TextMeshProUGUI m_nameText, m_dialogueText;
+    [HideInInspector]
     public GameObject m_answerBox;
-    public Text[] m_AnswerButtonText = new Text[4];
+    [HideInInspector]
+    public TMPro.TextMeshProUGUI[] m_AnswerButtonText = new TMPro.TextMeshProUGUI[4];
 
     private List<string> m_dialogue = new List<string>();
     private Scr_dialogue_profile m_currentProfile;
@@ -30,7 +29,13 @@ public class Scr_dialogue_display : MonoBehaviour
     private int m_questionIndex;
     private string m_name;
     private string m_textWritten = "";
+    private EventSystem m_eventSystem;
     private IEnumerator coroutine;
+
+    private void Start()
+    {
+        m_eventSystem = Scr_global_canvas.MainEventSystem;
+    }
 
 
     void Update()

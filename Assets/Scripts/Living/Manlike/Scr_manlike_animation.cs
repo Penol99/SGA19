@@ -6,7 +6,6 @@ using UnityEngine;
 public class Scr_manlike_animation : MonoBehaviour
 {
 
-
     private Scr_living_stats m_stats;
     private Animator m_animator;
     private Scr_manlike_input m_manInput;
@@ -66,7 +65,7 @@ public class Scr_manlike_animation : MonoBehaviour
             
         }
 
-        if (m_manInput.RollTrigger && !m_rollStart && m_stats.StatStamina > 0)
+        if (m_manInput.RollTrigger && !m_rollStart && m_stats.StatStamina > 0 && m_manInput.MoveVelocity > 0)
         {                        
             m_animator.SetTrigger("trigger_roll");
             m_manInput.RollTrigger = false;

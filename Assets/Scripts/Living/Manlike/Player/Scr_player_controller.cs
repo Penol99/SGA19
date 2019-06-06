@@ -86,6 +86,18 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
         }
         
     }
+
+    public void PlayerFreeze(bool value)
+    {
+       StartCoroutine(DelayPlayerFreeze(value));
+    }
+
+    private IEnumerator DelayPlayerFreeze(bool value)
+    {
+        yield return new WaitForSeconds(0.25f);
+        FreezePlayer = value;
+    }
+
     private void StateMachine()
     {
         switch (m_baseState)

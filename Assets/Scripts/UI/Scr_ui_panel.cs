@@ -18,9 +18,13 @@ public class Scr_ui_panel : MonoBehaviour
         {
             if (Input.GetButtonDown("Cancel"))
             {
+                
                 gameObject.SetActive(false);
-                m_toEnableOnCancel.gameObject.SetActive(true);
-                SetSelectedButton(m_toEnableOnCancel);
+                if (m_toEnableOnCancel != null)
+                {
+                    m_toEnableOnCancel.gameObject.SetActive(true);
+                    SetSelectedButton(m_toEnableOnCancel);
+                }
             }
         }
     }

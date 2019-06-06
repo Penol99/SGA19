@@ -12,7 +12,7 @@ public abstract class Scr_dialogue_profile : MonoBehaviour
     /// </summary>
     /// 
 
-    public Font m_dialogueFont;
+    public TMPro.TMP_FontAsset m_dialogueFont;
     public List<string> m_dialogue = new List<string>();
     public List<Question> m_questions = new List<Question>();
 

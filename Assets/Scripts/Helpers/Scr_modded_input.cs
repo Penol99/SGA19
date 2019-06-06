@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Scr_modded_input : MonoBehaviour
 {
-    public static bool DPadLeft, DPadRight;
+    public static bool LStickLeft, LStickRight;
 
-    private bool m_dpadPressedRight, m_dpadPressedLeft;
+    private bool m_lStickPressedRight, m_lStickPressedLeft;
 
 
 
@@ -19,33 +19,33 @@ public class Scr_modded_input : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetDPadPress();
+        SetLeftStickPress();
     }
 
-    private void SetDPadPress()
+    private void SetLeftStickPress()
     {
-        DPadRight = false;
-        DPadLeft = false;
-        float horAxis = Input.GetAxis("DPadHor");
-        if (!m_dpadPressedRight && horAxis > 0)
+        LStickRight = false;
+        LStickLeft = false;
+        float horAxis = Input.GetAxis("LeftHor");
+        if (!m_lStickPressedRight && horAxis > 0)
         {
-            m_dpadPressedLeft = false;
-            m_dpadPressedRight = true;
-            DPadRight = true;
+            m_lStickPressedLeft = false;
+            m_lStickPressedRight = true;
+            LStickRight = true;
         }
-        if (!m_dpadPressedLeft && horAxis < 0)
+        if (!m_lStickPressedLeft && horAxis < 0)
         {
-            m_dpadPressedLeft = true;
-            m_dpadPressedRight = false;
-            DPadLeft = true;
+            m_lStickPressedLeft = true;
+            m_lStickPressedRight = false;
+            LStickLeft = true;
         }
         if (horAxis <= 0)
         {
-            m_dpadPressedRight = false;
+            m_lStickPressedRight = false;
         }
         if (horAxis >= 0)
         {
-            m_dpadPressedLeft = false;
+            m_lStickPressedLeft = false;
         }
     }
 

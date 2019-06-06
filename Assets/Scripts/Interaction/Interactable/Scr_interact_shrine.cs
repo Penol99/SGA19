@@ -24,20 +24,25 @@ public class Scr_interact_shrine : MonoBehaviour, IInteract
         // This long ass line is so that you can only get out of ui if the first panel on the shrine window is active
         bool cancelUI = cancelButton && Scr_global_canvas.ShrineWindow.GetComponent<Scr_ui_window>().m_panels[0].gameObject.activeInHierarchy;
         if (cancelUI)
-        {        
-            Scr_player_controller.FreezePlayer = false;
+        {
+            //Scr_player_controller.FreezePlayer = false;
+            m_player.GetComponent<Scr_player_controller>().PlayerFreeze(false);
             Scr_global_canvas.ShrineWindow.SetActive(false);
         }
     }
 
     public void Interact()
     {
-        if (m_findTarget.GetTargetInRange(m_enemyRange) == null)
+        if (!Scr_global_canvas.PauseMenuActive)
         {
-            ChillAtShrine();
-        } else
-        {
-            Debug.Log("ENEMY IS CLOSE BY CANT SIT AT SHRINE");
+            if (m_findTarget.GetTargetInRange(m_enemyRange) == null)
+            {
+                ChillAtShrine();
+            }
+            else
+            {
+                Debug.Log("ENEMY IS CLOSE BY CANT SIT AT SHRINE");
+            }
         }
     }
 

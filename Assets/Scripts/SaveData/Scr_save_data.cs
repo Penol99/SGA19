@@ -3,13 +3,13 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 public static class Scr_save_data
 {
-    public static void SavePlayer(Scr_living_stats player)
+    public static void SavePlayer(Scr_living_stats player, Scr_player_rpg_stats playerRPG)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.ssf";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        Scr_data_player data = new Scr_data_player(player);
+        Scr_data_player data = new Scr_data_player(player,playerRPG);
 
         formatter.Serialize(stream, data);
         stream.Close();

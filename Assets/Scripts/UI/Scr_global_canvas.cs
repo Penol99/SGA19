@@ -16,6 +16,7 @@ public class Scr_global_canvas : MonoBehaviour
     public static GameObject PauseMenuPanel;
     public static GameObject DialogueBox;
     public static GameObject ShrineWindow;
+    public static bool PauseMenuActive;
 
     
 
@@ -37,8 +38,10 @@ public class Scr_global_canvas : MonoBehaviour
 
     private void DisablePanelOverride()
     {
-        Scr_global_pause.CanPause = !DialogueBox.activeInHierarchy || !ShrineWindow.activeInHierarchy;
-        Scr_interact_dialogue.CanStartDialogue = !PauseMenuPanel.activeInHierarchy;
+        PauseMenuActive = PauseMenuPanel.activeInHierarchy;
+        Scr_global_pause.CanPause = !DialogueBox.activeInHierarchy && !ShrineWindow.activeInHierarchy;
+        Scr_interact_dialogue.CanStartDialogue = !PauseMenuActive;
+        
     }
 
     public static void SetPanelActive(GameObject panel, bool value, bool setSelectedObject)
