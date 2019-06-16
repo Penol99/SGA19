@@ -10,6 +10,9 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
 {
     public PBaseState m_baseState;
     public PSubState m_subState;
+    public int m_ignoreLayer = 15;
+    public int m_playerLayer = 10;
+    
     public static bool FreezePlayer;
 
     private Scr_save_load_game m_saveManager;
@@ -46,6 +49,8 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
         m_manInput = GetComponent<Scr_manlike_input>();
         m_pMov = GetComponent<Scr_player_movement>();
         m_cc = GetComponent<CharacterController>();
+
+        Physics.IgnoreLayerCollision(m_playerLayer, m_ignoreLayer);
     }
 
     // Update is called once per frame

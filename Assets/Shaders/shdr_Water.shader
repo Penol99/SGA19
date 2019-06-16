@@ -1,4 +1,4 @@
-﻿Shader "Unlit/shdr_Water"
+﻿Shader "Custom/shdr_Water"
 {
     Properties
     {

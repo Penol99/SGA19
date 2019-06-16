@@ -1215,7 +1215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5604381090699402603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.871, y: -1.35, z: -35.621}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5604381090699166009}
@@ -1367,6 +1367,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_baseState: 0
   m_subState: 0
+  m_ignoreLayer: 15
+  m_playerLayer: 10
   m_canRoll: 0
   m_canRun: 0
 --- !u!114 &5604381090699402600
@@ -1528,6 +1530,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 5238403489661757982, guid: 86e380c6370ace4439b410ca3f087bd2,
+        type: 3}
+      propertyPath: m_weaponName
+      value: Standard Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 5238403489661757977, guid: 86e380c6370ace4439b410ca3f087bd2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1582,11 +1589,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5238403489661757982, guid: 86e380c6370ace4439b410ca3f087bd2,
-        type: 3}
-      propertyPath: m_weaponName
-      value: Standard Sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86e380c6370ace4439b410ca3f087bd2, type: 3}
