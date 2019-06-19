@@ -38,8 +38,7 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
     public bool R1ActionBtnDown { get => m_r1ActionBtnDown; set => m_r1ActionBtnDown = value; }
     public bool L1ActionBtn { get => m_l1ActionBtn; set => m_l1ActionBtn = value; }
 
-
-
+    
     // Start is called before the first frame update
     void Start()
     {

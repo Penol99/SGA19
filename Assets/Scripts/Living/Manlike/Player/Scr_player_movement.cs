@@ -30,6 +30,13 @@ public class Scr_player_movement : MonoBehaviour
     }
 
 
+    public void GotoPosition(Vector3 pos)
+    {
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = pos;
+        GetComponent<CharacterController>().enabled = true;
+    }
+
     //--ROTATE-PLAYER-WITH-MOVEMENT-STICK
     public void LeftStickRotation()
     {

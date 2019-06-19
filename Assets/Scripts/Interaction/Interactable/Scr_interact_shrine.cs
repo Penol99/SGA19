@@ -33,7 +33,7 @@ public class Scr_interact_shrine : MonoBehaviour, IInteract
 
     public void Interact()
     {
-        if (!Scr_global_canvas.PauseMenuActive)
+        if (!Scr_global_canvas.PauseActive)
         {
             if (m_findTarget.GetTargetInRange(m_enemyRange) == null)
             {

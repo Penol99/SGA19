@@ -10,19 +10,44 @@ public class Scr_save_load_game : MonoBehaviour
 
     private Scr_player_rpg_stats m_playerRPG;
     private Scr_living_fall_damage m_playerFallDmg;
+    private Scr_dygn_manager m_dygnManager;
 
 
     private void Awake()
     {
         m_player = FindObjectOfType<Scr_player_controller>().GetComponent<Scr_living_stats>();
+        m_dygnManager = FindObjectOfType<Scr_dygn_manager>();
         if (PlayerPrefs.GetInt("Continue") == 1)
         {
             // Loads game if continue was selected in the title screen.
             LoadGame();
             PlayerPrefs.SetInt("Continue", 0);
+            PlayerPrefs.Save();
         }
     }
 
+    private void SavePlayerPrefsData()
+    {
+        if (m_dygnManager.GetDygnPhase().Equals(DygnPhase.DAY))
+            PlayerPrefs.SetString("DygnPhase", "DAY");
+        else
+            PlayerPrefs.SetString("DygnPhase", "NIGHT");
+        PlayerPrefs.Save();
+    }
+
+    private void LoadPlayerPrefsData()
+    {
+        if (PlayerPrefs.GetString("DygnPhase").Equals("DAY"))
+            m_dygnManager.SetDygnPhaseDirectly(DygnPhase.DAY);
+        else
+            m_dygnManager.SetDygnPhaseDirectly(DygnPhase.NIGHT);
+    }
+
+    public IEnumerator DelaySaveGame(float time)
+    {
+        yield return new WaitForSeconds(time);
+            SaveGame();
+    }
 
     public void SaveGame()
     {
@@ -33,6 +58,7 @@ public class Scr_save_load_game : MonoBehaviour
         if (m_playerFallDmg.OnGround)
         {
             Scr_save_data.SavePlayer(m_player,m_playerRPG);
+            SavePlayerPrefsData();
             PlayerPrefs.SetInt("SceneIndex", m_player.SceneIndex);
         } else
         {
@@ -41,6 +67,7 @@ public class Scr_save_load_game : MonoBehaviour
     }
     public void LoadGame()
     {
+        #region PlayerData
         Scr_data_player playerData = Scr_save_data.LoadPlayer();
         m_playerRPG = m_player.GetComponent<Scr_player_rpg_stats>();
 
@@ -71,10 +98,12 @@ public class Scr_save_load_game : MonoBehaviour
             playerPos.z = playerData.position[2];
         }
         PlayerPrefs.SetInt("PlayerDied", 0);
-
-
-
         m_player.transform.position = playerPos;
+        #endregion
+        LoadPlayerPrefsData();
+
     }
+
+
 
 }

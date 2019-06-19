@@ -10,13 +10,20 @@ public class Scr_global_canvas : MonoBehaviour
     public GameObject m_pauseMenuPanel;
     public GameObject m_dialogueBox;
     public GameObject m_shrineWindow;
+    public GameObject m_bedPanel;
+    public GameObject[] m_overlayAnimations;
 
     public static EventSystem MainEventSystem;
     public static GameObject PlayerStatsPanel;
     public static GameObject PauseMenuPanel;
     public static GameObject DialogueBox;
     public static GameObject ShrineWindow;
-    public static bool PauseMenuActive;
+    public static GameObject BedPanel;
+    public static GameObject[] OverlayAnimations;
+    public static bool PauseActive;
+    public static bool DialogueActive;
+    public static bool ShrineActive;
+    public static bool BedActive;
 
     
 
@@ -28,6 +35,8 @@ public class Scr_global_canvas : MonoBehaviour
         PauseMenuPanel = m_pauseMenuPanel;
         DialogueBox = m_dialogueBox;
         ShrineWindow = m_shrineWindow;
+        BedPanel = m_bedPanel;
+        OverlayAnimations = m_overlayAnimations;
     }
 
     // Update is called once per frame
@@ -36,11 +45,29 @@ public class Scr_global_canvas : MonoBehaviour
         DisablePanelOverride();
     }
 
+    private bool ObjectArrayActive(GameObject[] objects)
+    {
+        bool isActive = false;
+        foreach (var obj in objects)
+        {
+            if (obj.activeInHierarchy)
+                isActive = true;
+        }
+
+        return isActive;
+    }
+
     private void DisablePanelOverride()
     {
-        PauseMenuActive = PauseMenuPanel.activeInHierarchy;
-        Scr_global_pause.CanPause = !DialogueBox.activeInHierarchy && !ShrineWindow.activeInHierarchy;
-        Scr_interact_dialogue.CanStartDialogue = !PauseMenuActive;
+        PauseActive = PauseMenuPanel.activeInHierarchy;
+        DialogueActive = DialogueBox.activeInHierarchy;
+        ShrineActive = ShrineWindow.activeInHierarchy;
+        BedActive = BedPanel.activeInHierarchy;
+
+
+        Scr_global_pause.CanPause = !DialogueActive && !ShrineActive && !BedActive && !ObjectArrayActive(OverlayAnimations);
+        Scr_interact_dialogue.CanStartDialogue = !PauseActive && !ShrineActive;
+        Scr_interact_bed.CanGoToBed = !PauseActive && !DialogueActive && !BedActive;
         
     }
 

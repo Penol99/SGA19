@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Town/scene_town.unity
     guid: 24de9dfe3ad948e4c8e4504629e3c246
+  - enabled: 1
+    path: Assets/Scenes/Town/Home and Shop/scene_town_shop.unity
+    guid: 1b5abf61d58681d469b070ce2f48e1f4
+  - enabled: 1
+    path: Assets/Scenes/Town/Home and Shop/scene_town_shop_home.unity
+    guid: cc95fc55f3597b940b7236ad751b0ed5
   m_configObjects: {}

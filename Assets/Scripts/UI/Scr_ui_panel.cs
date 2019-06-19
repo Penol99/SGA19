@@ -8,9 +8,16 @@ public class Scr_ui_panel : MonoBehaviour
     public GameObject m_firstSelectedObject;
     [Header("If close on cancel button")]
     public bool m_closeOnCancelButton;
+    public bool m_unfreezePlayer;
     public Scr_ui_panel m_toEnableOnCancel;
 
+    private Scr_player_controller m_pCon;
 
+    private void Start()
+    {
+        if (m_unfreezePlayer)
+            m_pCon = FindObjectOfType<Scr_player_controller>();
+    }
 
     private void Update()
     {
@@ -20,10 +27,17 @@ public class Scr_ui_panel : MonoBehaviour
             {
                 
                 gameObject.SetActive(false);
+
+                if (m_unfreezePlayer)
+                    m_pCon.PlayerFreeze(false);
+
                 if (m_toEnableOnCancel != null)
                 {
                     m_toEnableOnCancel.gameObject.SetActive(true);
                     SetSelectedButton(m_toEnableOnCancel);
+                } else
+                {
+                    Scr_global_canvas.MainEventSystem.SetSelectedGameObject(null);
                 }
             }
         }
