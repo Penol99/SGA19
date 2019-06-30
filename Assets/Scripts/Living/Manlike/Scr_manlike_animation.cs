@@ -88,16 +88,19 @@ public class Scr_manlike_animation : MonoBehaviour
     {
 
         m_idleWalkRun = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Walking/Running");
-        m_rollStart = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll Start") ||
-                      m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll Start 0");
-        m_rollEnd = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll End") ||
-                    m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll End 0");
+
+        
+
         m_lightAttackStart = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Combat.Armature|Slash 1 Start") ||
                              m_animator.GetCurrentAnimatorStateInfo(0).IsName("Combat.Armature|Slash 2 Start");
         m_lightAttackEnd = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Combat.Armature|Slash 1 End") ||
                            m_animator.GetCurrentAnimatorStateInfo(0).IsName("Combat.Armature|Slash 2 End");
-        m_shield = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Shield") ||
-                   m_animator.GetCurrentAnimatorStateInfo(1).IsName("Ground Actions.Armature|Shield");// If theres more shield animations then add that to this bool.
 
+        /*
+        m_rollStart = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll Start") ||
+                      m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll Start 0");
+        m_rollEnd = m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll End") ||
+                    m_animator.GetCurrentAnimatorStateInfo(0).IsName("Ground Actions.Armature|Roll End 0");
+        */
     }
 }

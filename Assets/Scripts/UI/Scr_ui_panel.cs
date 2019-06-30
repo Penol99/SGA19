@@ -6,12 +6,21 @@ using UnityEngine;
 public class Scr_ui_panel : MonoBehaviour
 {
     public GameObject m_firstSelectedObject;
+    public bool m_freezePlayer;
     [Header("If close on cancel button")]
     public bool m_closeOnCancelButton;
     public bool m_unfreezePlayer;
+    public bool m_disableParent;
     public Scr_ui_panel m_toEnableOnCancel;
 
     private Scr_player_controller m_pCon;
+
+    private void OnEnable()
+    {
+        Scr_player_controller.FreezePlayer = m_freezePlayer;
+        if (m_firstSelectedObject != null)
+            SetSelectedButton(GetComponent<Scr_ui_panel>());
+    }
 
     private void Start()
     {
@@ -30,6 +39,8 @@ public class Scr_ui_panel : MonoBehaviour
 
                 if (m_unfreezePlayer)
                     m_pCon.PlayerFreeze(false);
+                if (m_disableParent)
+                    transform.parent.gameObject.SetActive(false);
 
                 if (m_toEnableOnCancel != null)
                 {
@@ -42,6 +53,7 @@ public class Scr_ui_panel : MonoBehaviour
             }
         }
     }
+
 
     public void OpenPanel(Scr_ui_panel panel)
     {    
@@ -57,6 +69,13 @@ public class Scr_ui_panel : MonoBehaviour
 
     public void SetSelectedButton(Scr_ui_panel panel)
     {
+        StartCoroutine(WaitForButtonSelect(panel));
+    }
+
+    private IEnumerator WaitForButtonSelect(Scr_ui_panel panel)
+    {
+        Scr_global_canvas.MainEventSystem.SetSelectedGameObject(null);
+        yield return new WaitForEndOfFrame();
         GameObject firstSelected = panel.m_firstSelectedObject;
         Scr_global_canvas.MainEventSystem.SetSelectedGameObject(firstSelected);
     }

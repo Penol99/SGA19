@@ -17,7 +17,6 @@ public class Scr_ui_shrine_stat : MonoBehaviour
 { 
     public RPG_STATS m_statType;
     public TMPro.TextMeshProUGUI m_levelText;
-    private EventSystem m_eventSys;
     private Scr_player_rpg_stats m_rpgStats;
     private Scr_ui_level_up m_levelUpPanel;
     private int m_modifiedLevel;
@@ -25,7 +24,6 @@ public class Scr_ui_shrine_stat : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        m_eventSys = Scr_global_canvas.MainEventSystem;
         m_rpgStats = FindObjectOfType<Scr_player_rpg_stats>();
         m_modifiedLevel = GetCurrentStat(m_statType);
         m_levelUpPanel = FindObjectOfType<Scr_ui_level_up>();
@@ -33,14 +31,15 @@ public class Scr_ui_shrine_stat : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         ModifyLevel();
     }
 
     private void ModifyLevel()
     {
-        if (m_eventSys.currentSelectedGameObject.Equals(gameObject))
+
+        if (Scr_global_canvas.MainEventSystem.currentSelectedGameObject.Equals(gameObject))
         {
             if (m_levelUpPanel.m_modifiedMoney >= m_rpgStats.MoneyForNextLevel(m_levelUpPanel.m_modifiedLevel))
             {

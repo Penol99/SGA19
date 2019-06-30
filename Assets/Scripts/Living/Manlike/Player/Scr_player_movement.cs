@@ -59,12 +59,14 @@ public class Scr_player_movement : MonoBehaviour
         // Add the 2 Dimensions of the joystick into an absolute 1 Dimensional float multiplied by speed
         float x = Mathf.Abs(m_pCon.LHor);
         float y = Mathf.Abs(m_pCon.LVer);
+        
 
 
         if (!Scr_player_controller.FreezePlayer)
         {
             LeftStickRotation();
             moveVelocity = Scr_math_formulas.SquareToCircle(x, y) * moveSpeed;
+            
         }
         else
             moveVelocity = 0;

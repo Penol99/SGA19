@@ -164,6 +164,7 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
         m_manInput.RunDelayTimer = (m_manInput.RunDelayTimer + Time.deltaTime) * System.Convert.ToInt16(m_manInput.RunTrigger);
         m_manInput.CurrentMoveSpeed = (m_manInput.m_walkSpeed * intOffRun) + (m_manInput.m_runSpeed * intInRun);
         m_manInput.MoveVelocity = m_pMov.SetMoveVelocity(m_manInput.CurrentMoveSpeed, m_manInput.MoveVelocity);
+        m_manInput.MoveVelocity = Mathf.Clamp(m_manInput.MoveVelocity, 0, m_manInput.CurrentMoveSpeed);
 
         #region Stop Running when stamina is 0
         if (inRun && m_stats.StatStamina < 0.5f)

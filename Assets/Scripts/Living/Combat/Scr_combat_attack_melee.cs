@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Scr_combat_attack_melee : MonoBehaviour
 {
+    
     public Scr_combat_weapon m_weapon;
+    [HideInInspector]
+    public bool m_weaponEquipped;
 
     private Scr_living_stats m_stats;
 
@@ -21,5 +24,17 @@ public class Scr_combat_attack_melee : MonoBehaviour
     public void EndAttack()
     {
         m_weapon.EnableHitboxes(false,m_stats);
+    }
+
+    public void Unequip()
+    {
+        m_weaponEquipped = false;
+        m_weapon.gameObject.SetActive(false);
+    }
+
+    public void Equip()
+    {
+        m_weaponEquipped = true;
+        m_weapon.gameObject.SetActive(true);
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Scr_combat_hitbox : MonoBehaviour
 {
-    public bool m_hasWeapon;
+    public bool m_displayGizmo;
+    public bool m_attachedToAWeapon;
     public float m_damage;
     public Transform m_hitTransform;
 
@@ -20,12 +21,12 @@ public class Scr_combat_hitbox : MonoBehaviour
 
     private void Update()
     {
-        ShieldShrink();
+        //ShieldShrink();
     }
 
     void Start()
     {
-        if (m_hasWeapon)
+        if (m_attachedToAWeapon)
             m_weapon = GetComponentInParent<Scr_combat_weapon>();
 
         m_rootParent = transform.root.gameObject;
@@ -90,7 +91,7 @@ public class Scr_combat_hitbox : MonoBehaviour
     {
         if (!m_targetsHit.Contains(target))
         {
-            if (m_hasWeapon)
+            if (m_attachedToAWeapon)
                 m_weapon.DirectHasHit = true;
 
             target.Hurt(m_damage,m_rootParent);
@@ -109,7 +110,7 @@ public class Scr_combat_hitbox : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (m_drawGizmos)
+        if (m_drawGizmos || m_displayGizmo)
         {
             Gizmos.color = new Color(255, 0f, 0f, .5f);
             Gizmos.matrix = m_hitTransform.localToWorldMatrix;

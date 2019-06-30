@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.2620697}
   m_SizeDelta: {x: 205.39, y: 59.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &72773136
@@ -523,8 +523,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstSelectedObject: {fileID: 72773132}
+  m_freezePlayer: 0
   m_closeOnCancelButton: 1
   m_unfreezePlayer: 1
+  m_disableParent: 0
   m_toEnableOnCancel: {fileID: 0}
 --- !u!114 &1985775079
 MonoBehaviour:
@@ -995,8 +997,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstSelectedObject: {fileID: 1675090806373021746}
+  m_freezePlayer: 0
   m_closeOnCancelButton: 0
   m_unfreezePlayer: 0
+  m_disableParent: 0
   m_toEnableOnCancel: {fileID: 0}
 --- !u!114 &1675090805946792067
 MonoBehaviour:
@@ -1131,16 +1135,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenPanel
-        m_Mode: 2
+      - m_Target: {fileID: 1675090806685754781}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 1675090806685754771}
-          m_ObjectArgumentAssemblyTypeName: Scr_ui_panel, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1675090807657593081}
         m_MethodName: SetActive
@@ -3060,7 +3064,6 @@ GameObject:
   - component: {fileID: 1675090806442129380}
   - component: {fileID: 1675090806442129383}
   - component: {fileID: 1675090806442129382}
-  - component: {fileID: 1675090806442129377}
   - component: {fileID: 1675090806442129381}
   m_Layer: 5
   m_Name: Global Canvas
@@ -3137,23 +3140,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &1675090806442129377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675090806442129376}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1675090806442129381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3622,7 +3608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -135}
+  m_AnchoredPosition: {x: 0, y: -135.10004}
   m_SizeDelta: {x: 51, y: 532.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1675090806685754774
@@ -3675,8 +3661,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstSelectedObject: {fileID: 1675090807459082667}
+  m_freezePlayer: 1
   m_closeOnCancelButton: 1
-  m_unfreezePlayer: 0
+  m_unfreezePlayer: 1
+  m_disableParent: 1
   m_toEnableOnCancel: {fileID: 0}
 --- !u!114 &1675090806685754768
 MonoBehaviour:
@@ -4564,8 +4552,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstSelectedObject: {fileID: 1675090807687406549}
+  m_freezePlayer: 0
   m_closeOnCancelButton: 0
   m_unfreezePlayer: 0
+  m_disableParent: 0
   m_toEnableOnCancel: {fileID: 0}
 --- !u!114 &4639812423266117668
 MonoBehaviour:
@@ -5202,8 +5192,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstSelectedObject: {fileID: 1675090807733664789}
+  m_freezePlayer: 0
   m_closeOnCancelButton: 1
   m_unfreezePlayer: 0
+  m_disableParent: 0
   m_toEnableOnCancel: {fileID: 1675090805946792066}
 --- !u!1 &1675090807311438908
 GameObject:
@@ -6349,8 +6341,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstSelectedObject: {fileID: 0}
+  m_freezePlayer: 0
   m_closeOnCancelButton: 0
   m_unfreezePlayer: 0
+  m_disableParent: 0
   m_toEnableOnCancel: {fileID: 0}
 --- !u!1 &1675090807578268454
 GameObject:
@@ -6520,6 +6514,7 @@ GameObject:
   - component: {fileID: 1675090807657593086}
   - component: {fileID: 1675090807657593084}
   - component: {fileID: 1675090807657593087}
+  - component: {fileID: 2796727351408019796}
   m_Layer: 5
   m_Name: Interact Panel
   m_TagString: Untagged
@@ -6584,6 +6579,24 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2796727351408019796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675090807657593081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed7f88a1df423a4aacc96d1e84d0487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_firstSelectedObject: {fileID: 1675090805965583704}
+  m_freezePlayer: 1
+  m_closeOnCancelButton: 1
+  m_unfreezePlayer: 1
+  m_disableParent: 1
+  m_toEnableOnCancel: {fileID: 0}
 --- !u!1 &1675090807672692862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7210,9 +7223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed7f88a1df423a4aacc96d1e84d0487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_firstSelectedObject: {fileID: 1675090807687406549}
+  m_firstSelectedObject: {fileID: 0}
+  m_freezePlayer: 0
   m_closeOnCancelButton: 0
   m_unfreezePlayer: 0
+  m_disableParent: 0
   m_toEnableOnCancel: {fileID: 0}
 --- !u!1 &1675090807899698722
 GameObject:
@@ -7634,7 +7649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panels:
-  - {fileID: 0}
+  - {fileID: 2796727351408019796}
   - {fileID: 1675090806685754771}
 --- !u!1 &4639812421418124241
 GameObject:

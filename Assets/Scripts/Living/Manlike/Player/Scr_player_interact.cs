@@ -6,7 +6,7 @@ public class Scr_player_interact : MonoBehaviour
 {
     private bool m_canInteract;
 
-    private float m_interactRange = 3f;
+    private float m_interactRange = 6f;
     private float m_interactAngle = 0.01f;
     private Scr_save_load_game saveManager;
 
