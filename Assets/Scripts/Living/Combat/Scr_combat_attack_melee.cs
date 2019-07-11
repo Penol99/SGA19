@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Scr_combat_attack_melee : MonoBehaviour
 {
-    
+    public Transform m_handBone;
     public Scr_combat_weapon m_weapon;
     [HideInInspector]
     public bool m_weaponEquipped;

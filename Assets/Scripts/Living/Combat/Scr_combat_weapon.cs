@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponName
+{
+    STICK_NORMAL,
+    STICK_TEST
+}
 public class Scr_combat_weapon : MonoBehaviour
 {
 
-    public string m_weaponName;
+    public WeaponName m_weaponName;
     [Header("Stats")]
     public float m_equipLoad;
     public float m_staminaLoss;

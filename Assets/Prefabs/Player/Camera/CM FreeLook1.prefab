@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8210140527479007154}
   - component: {fileID: 8210140527479007148}
   - component: {fileID: 8210140527479007151}
+  - component: {fileID: 6684582462926142440}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -78,7 +79,7 @@ MonoBehaviour:
     m_MaxSpeed: 1.12
     m_AccelTime: 0.2
     m_DecelTime: 0.1
-    m_InputAxisName: RightVer
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
     m_MaxSpeed: 125
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: RightHor
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: -180
@@ -182,6 +183,18 @@ MonoBehaviour:
   m_wallsToCollide:
     serializedVersion: 2
     m_Bits: 16384
+--- !u!114 &6684582462926142440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8210140527479007155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d862b5c63e8f6ff47a2b79316fc40797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8210140527703119173
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +219,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8210140527703119173}
-  m_LocalRotation: {x: 0.053564727, y: 0.967549, z: -0.04719255, w: -0.24238952}
+  m_LocalRotation: {x: 0.038731683, y: 0.8653278, z: -0.059968304, w: -0.49609634}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -340,7 +353,7 @@ MonoBehaviour:
     m_MaxSpeed: 125
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: RightHor
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: -180
@@ -407,7 +420,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8210140528041490410}
-  m_LocalRotation: {x: 0.056803722, y: 0.96736425, z: -0.04800379, w: -0.24223013}
+  m_LocalRotation: {x: 0.041628256, y: 0.86519325, z: -0.0616287, w: -0.49589282}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -541,7 +554,7 @@ MonoBehaviour:
     m_MaxSpeed: 125
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: RightHor
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: -180
@@ -666,7 +679,7 @@ MonoBehaviour:
     m_MaxSpeed: 125
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: RightHor
+    m_InputAxisName: 
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: -180
@@ -733,7 +746,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8210140529563950856}
-  m_LocalRotation: {x: 0.05473408, y: 0.9674836, z: -0.047485474, w: -0.24233228}
+  m_LocalRotation: {x: 0.039777327, y: 0.86528033, z: -0.060567744, w: -0.4960235}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

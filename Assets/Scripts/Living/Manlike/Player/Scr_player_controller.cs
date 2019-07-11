@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Scr_player_movement))]
 public class Scr_player_controller : MonoBehaviour, IPlayerStates
 {
+    
     public PBaseState m_baseState;
     public PSubState m_subState;
     public int m_ignoreLayer = 15;
@@ -86,7 +87,7 @@ public class Scr_player_controller : MonoBehaviour, IPlayerStates
             m_manInput.RunTrigger = Input.GetButton("Run");
             m_manInput.RollTrigger = Input.GetButtonUp("Roll");
             m_manInput.R1Trigger = Input.GetButtonDown("R1Action");
-            m_manInput.L1Trigger = Input.GetButton("L1Action");
+            m_manInput.L1Trigger = Input.GetButtonDown("L1Action");
         }
         
     }

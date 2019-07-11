@@ -21,6 +21,7 @@ public class Scr_camera_obj_avoid : MonoBehaviour
     private bool m_cRayR, m_cRayL, m_cRayU, m_cRayD, m_cRayF, m_cRayB;
     private bool m_pAnyRays;
     private bool m_cAnyRays;
+    private bool m_playerFrozen;
 
     //private float orbitCollisionSpeed = 36f;
     private float m_playerAngle;
@@ -138,14 +139,16 @@ public class Scr_camera_obj_avoid : MonoBehaviour
         // Freeze Camera, only added this code here cause its the only script attached to the freelook
         if (Scr_player_controller.FreezePlayer)
         {
+            m_playerFrozen = true;
             m_camFreeLook.m_YAxis.m_InputAxisValue = 0f;
             m_camFreeLook.m_XAxis.m_InputAxisValue = 0f;
             m_camFreeLook.m_YAxis.m_InputAxisName = "";
             m_camFreeLook.m_XAxis.m_InputAxisName = "";
-        } else
+        } else if (m_playerFrozen)
         {
             m_camFreeLook.m_YAxis.m_InputAxisName = "RightVer";
             m_camFreeLook.m_XAxis.m_InputAxisName = "RightHor";
+            m_playerFrozen = false;
         }
         
     }

@@ -23,6 +23,7 @@ public class Scr_manlike_input : MonoBehaviour
     private bool m_l2Trigger;
     private bool m_stunlockTrigger;
     private bool m_rollTrigger; // In player controller, this should be set to a button that releases
+    private bool m_onLadder;
 
     public float MoveVelocity { get => m_moveVelocity; set => m_moveVelocity = value; }
     public bool R1Trigger { get => m_r1Trigger; set => m_r1Trigger = value; }
@@ -34,6 +35,7 @@ public class Scr_manlike_input : MonoBehaviour
     public bool RunTrigger { get => m_runTrigger; set => m_runTrigger = value; }
     public float RunDelayTimer { get => m_runDelayTimer; set => m_runDelayTimer = value; }
     public bool StunlockTrigger { get => m_stunlockTrigger; set => m_stunlockTrigger = value; }
+    public bool OnLadder { get => m_onLadder; set => m_onLadder = value; }
 
     private void LateUpdate()
     {

@@ -21,11 +21,14 @@ public class Scr_collision_checkbox : MonoBehaviour
             m_checkStay = true;
             foreach (var item in GetComponents<IOnCheck>())
             {
-                item.OnCheckStay();              
-                if (m_checkStay && !m_checkEnter)
+                if (item != null)
                 {
-                    m_checkEnter = true;
-                    item.OnCheckEnter();                   
+                    item.OnCheckStay();
+                    if (m_checkStay && !m_checkEnter)
+                    {
+                        m_checkEnter = true;
+                        item.OnCheckEnter();
+                    }
                 }
             }
         } else
@@ -34,7 +37,10 @@ public class Scr_collision_checkbox : MonoBehaviour
             {
                 foreach (var item in GetComponents<IOnCheck>())
                 {
-                    item.OnCheckExit(); 
+                    if (item != null)
+                    {
+                        item.OnCheckExit();
+                    }
                 }
             }
             m_checkStay = false;
